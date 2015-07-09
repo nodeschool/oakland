@@ -1,0 +1,33 @@
+body {
+	padding: 7rem 7.5%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: bold;
+}
+
+.site {
+	width: 640px;
+}
+
+.logo {
+	width: 150px;
+}
+
+.content-section {
+	margin: 5rem 0;
+}
+
+.event__location__link {
+	font-weight: bold;
+}
+
+.event__location__map {
+	display: block;
+	margin: 1rem 0;
+}
