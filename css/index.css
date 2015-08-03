@@ -11,12 +11,24 @@ h6 {
 	font-weight: bold;
 }
 
+a {
+	text-decoration: none;
+}
+
 .site {
 	width: 640px;
 }
 
 .logo {
 	width: 150px;
+}
+
+.title {
+	margin-bottom: 0;
+}
+
+.twitter {
+	margin-top: 0;
 }
 
 .content-section {
