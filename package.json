@@ -1,0 +1,28 @@
+{
+  "name": "nodeschool-oakland",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodeschool/oakland.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nodeschool/oakland/issues"
+  },
+  "homepage": "https://github.com/nodeschool/oakland#readme",
+  "dependencies": {
+    "inquirer": "^1.2.1",
+    "request": "^2.75.0",
+    "slug": "^0.9.1"
+  }
+}
