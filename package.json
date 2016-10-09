@@ -22,6 +22,9 @@
   "homepage": "https://github.com/nodeschool/oakland#readme",
   "dependencies": {
     "inquirer": "^1.2.1",
+    "lodash": "^4.16.4",
+    "moment": "^2.15.1",
+    "mustache": "^2.2.1",
     "request": "^2.75.0",
     "slug": "^0.9.1"
   }
