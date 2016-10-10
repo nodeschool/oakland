@@ -7,6 +7,8 @@ const Mustache = require('mustache');
 const moment = require('moment');
 const _ = require('lodash');
 const async = require('async');
+const ora = require('ora');
+const chalk = require('chalk');
 
 slug.defaults.mode = 'rfc3986';
 
@@ -29,6 +31,8 @@ const GITHUB_HEADERS = {
 };
 const GITHUB_ORG = 'Fauntleroy';
 const GITHUB_REPO = 'github-api-test-repo';
+const SUCCESS_SYMBOL = chalk.green('✔');
+const FAILURE_SYMBOL = chalk.red('✘');
 
 const mentorIssueTemplate = fs.readFileSync(`${__dirname}/templates/mentor-registration-issue.mustache`, 'utf8');
 const titoDescriptionTemplate = fs.readFileSync(`${__dirname}/templates/tito-description.mustache`, 'utf8');
@@ -114,7 +118,7 @@ function inquire (callback) {
 }
 
 function createMentorIssue (data, callback) {
-  console.log('Creating Mentor Registration GitHub Issue.');
+  const progressIndicator = ora('Creating Mentor Registration GitHub Issue').start();
   const { eventName, eventLocationName, eventDate, eventTime } = data;
   const mentorIssueBody = Mustache.render(mentorIssueTemplate, {
     locationName: eventLocationName,
@@ -132,11 +136,12 @@ function createMentorIssue (data, callback) {
     }
   }, function (error, response, body) {
     if (error) {
+      progressIndicator.stopAndPersist(FAILURE_SYMBOL);
       callback(error);
       return;
     }
 
-    console.log('Mentor Registration GitHub Issue created.');
+    progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
     const { html_url: mentorRegistrationUrl } = body;
     const updatedData = _.assign(data, {
       mentorRegistrationUrl
@@ -146,18 +151,19 @@ function createMentorIssue (data, callback) {
 }
 
 function duplicateTitoEvent (data, callback) {
-  console.log('Duplicating existing ti.to Event.');
+  const progressIndicator = ora('Duplicating existing ti.to Event').start();
   request.post({
     url: `${TITO_URL}/${TITO_EVENT_TO_DUPLICATE}/duplicate`,
     headers: TITO_HEADERS,
     json: true
   }, function (error, response, body) {
     if (error) {
+      progressIndicator.stopAndPersist(FAILURE_SYMBOL);
       callback(error);
       return;
     }
 
-    console.log('ti.to Event duplicated.');
+    progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
     const eventApiId = _.get(body, 'data.id');
     const eventApiUrl = _.get(body, 'data.links.self');
     const updatedData = _.assign(data, {
@@ -169,7 +175,7 @@ function duplicateTitoEvent (data, callback) {
 }
 
 function updateTitoEvent (data, callback) {
-  console.log('Updating ti.to Event.');
+  const progressIndicator = ora('Updating ti.to Event').start();
   const {
     eventName,
     eventLocation,
@@ -207,11 +213,12 @@ function updateTitoEvent (data, callback) {
     }
   }, function (error, response, body) {
     if (error) {
+      progressIndicator.stopAndPersist(FAILURE_SYMBOL);
       callback(error);
       return;
     }
 
-    console.log('ti.to Event updated.');
+    progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
     const eventApiId = _.get(body, 'data.id');
     const eventApiUrl = _.get(body, 'data.links.self');
     const updatedData = _.assign(data, {
@@ -223,7 +230,7 @@ function updateTitoEvent (data, callback) {
 }
 
 function updateTitoEventSettings (data, callback) {
-  console.log('Updating ti.to Event settings');
+  const progressIndicator = ora('Updating ti.to Event settings').start();
   const { eventDate, eventTime, eventLocationName, eventApiUrl } = data;
   const date = moment(eventDate).format('MMMM Do');
 
@@ -241,17 +248,18 @@ function updateTitoEventSettings (data, callback) {
     }
   }, function (error, response, body) {
     if (error) {
+      progressIndicator.stopAndPersist(FAILURE_SYMBOL);
       callback(error);
       return;
     }
 
-    console.log('ti.to Event settings updated.');
+    progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
     callback(null, data);
   });
 }
 
 function getTitoEventReleases (data, callback) {
-  console.log('Getting ti.to Event releases');
+  const progressIndicator = ora('Getting ti.to Event releases').start();
   const { eventApiUrl } = data;
 
   request.get({
@@ -260,11 +268,12 @@ function getTitoEventReleases (data, callback) {
     json: true
   }, function (error, response, body) {
     if (error) {
+      progressIndicator.stopAndPersist(FAILURE_SYMBOL);
       callback(error);
       return;
     }
 
-    console.log('ti.to Event releases recovered.');
+    progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
     const eventReleaseApiId = _.get(body, 'data[0].id');
     const eventReleaseApiUrl = _.get(body, 'data[0].links.self');
     const updatedData = _.assign(data, {
@@ -276,7 +285,7 @@ function getTitoEventReleases (data, callback) {
 }
 
 function updateTitoEventRelease (data, callback) {
-  console.log('Updating ti.to Event release');
+  const progressIndicator = ora('Updating ti.to Event release').start();
   const { eventTime, eventReleaseApiId, eventReleaseApiUrl } = data;
 
   request.patch({
@@ -294,11 +303,12 @@ function updateTitoEventRelease (data, callback) {
     }
   }, function (error, response, body) {
     if (error) {
+      progressIndicator.stopAndPersist(FAILURE_SYMBOL);
       callback(error);
       return;
     }
 
-    console.log('ti.to Event release updated.');
+    progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
     callback(null, data);
   });
 }
