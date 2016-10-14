@@ -9,14 +9,25 @@ const _ = require('lodash');
 const async = require('async');
 const ora = require('ora');
 const chalk = require('chalk');
+const Nightmare = require('nightmare');
 
 slug.defaults.mode = 'rfc3986';
 
 const {
   NODESCHOOL_OAK_GITHUB_API_USER,
   NODESCHOOL_OAK_GITHUB_API_TOKEN,
-  NODESCHOOL_OAK_TITO_API_KEY
+  NODESCHOOL_OAK_TITO_API_KEY,
+  NODESCHOOL_OAK_GOOGLE_MAPS_API_KEY
 } = process.env;
+const NODESCHOOL_OAK_DEFAULT_EVENT_LOCATION = '1999 Harrison St. Ste. 1150 Oakland, CA 94612';
+const NODESCHOOL_OAK_DEFAULT_EVENT_COORDS = {
+  lat: 37.8077447,
+  lng: -122.2653488
+};
+const NODESCHOOL_CALENDAR_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe2SK5Vzy82yB9SjLI5B3zfrR1QEaxyjyRGvVxWp_K66p31ZA/viewform';
+const NODESCHOOL_CHAPTER_NAME = 'NodeSchool Oakland';
+const NODESCHOOL_CHAPTER_LOCATION = 'Oakland, California';
+const NODESCHOOL_CHAPTER_URL = 'https://nodeschool.io/oakland';
 const TITO_ACCOUNT = 'nodeschool-oakland';
 const TITO_URL = `https://api.tito.io/v2/${TITO_ACCOUNT}`;
 const TITO_HEADERS = {
@@ -31,6 +42,7 @@ const GITHUB_HEADERS = {
 };
 const GITHUB_ORG = 'Fauntleroy';
 const GITHUB_REPO = 'github-api-test-repo';
+const GOOGLE_MAPS_API_URL = 'https://maps.googleapis.com/maps/api';
 const SUCCESS_SYMBOL = chalk.green('✔');
 const FAILURE_SYMBOL = chalk.red('✘');
 
@@ -66,7 +78,7 @@ const eventLocationQuestion = {
   type: 'input',
   name: 'eventLocation',
   message: 'Where will the event be located?',
-  default: '1999 Harrison St. Ste. 1150 Oakland, CA 94612',
+  default: NODESCHOOL_OAK_DEFAULT_EVENT_LOCATION,
   validate: function (input) {
     if (!input) {
       return 'You must input a location for the event!';
@@ -313,6 +325,70 @@ function updateTitoEventRelease (data, callback) {
   });
 }
 
+function getEventLocationLatLng (data, callback) {
+  const progressIndicator = ora('Getting event location latitude and longitude').start();
+  const { eventLocation } = data;
+
+  request.get({
+    url: `${GOOGLE_MAPS_API_URL}/geocode/json`,
+    json: true,
+    qs: {
+      address: eventLocation,
+      key: NODESCHOOL_OAK_GOOGLE_MAPS_API_KEY
+    }
+  }, function (error, response, body) {
+    if (error) {
+      console.log('geocoding error', error);
+      progressIndicator.stopAndPersist(FAILURE_SYMBOL);
+      callback(error);
+      return;
+    }
+    progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
+    const eventLocationCoordinates = _.get(body, 'results[0].geometry.location') || NODESCHOOL_OAK_DEFAULT_EVENT_COORDS;
+    const updatedData = _.assign(data, {
+      eventLocationCoordinates
+    });
+    callback(null, updatedData);
+  });
+}
+
+function addEventToNodeSchoolCalendar (data, callback) {
+  const progressIndicator = ora('Adding event to NodeSchool calendar').start();
+  const { eventLocationCoordinates, eventDate } = data;
+  const nightmare = Nightmare({
+    show: true,
+    webPreferences: {
+      preload: `${__dirname}/config/custom_nightmare_preload.js`
+    }
+  });
+
+  nightmare
+    .goto(NODESCHOOL_CALENDAR_FORM_URL)
+    .type('input[aria-label="Name"]', NODESCHOOL_CHAPTER_NAME)
+    .type('input[aria-label="Location"]', NODESCHOOL_CHAPTER_LOCATION)
+    .type('input[aria-label="Latitude"]', eventLocationCoordinates.lat)
+    .type('input[aria-label="Longitude"]', eventLocationCoordinates.lng)
+    .type('*[aria-label="Start Date"] input', moment(eventDate).format('MMDDYYYY'))
+    .type('input[aria-label="Website"]', NODESCHOOL_CHAPTER_URL)
+    .evaluate(function () {
+      document.querySelector('form').submit();
+    })
+    .wait('.freebirdFormviewerViewResponseLinksContainer')
+    .evaluate(function () {
+      return document.querySelector('.freebirdFormviewerViewResponseBottomLink').href;
+    })
+    .end()
+    .then(function (editLink) {
+      progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
+      console.log('Google Forms edit link:', editLink);
+      callback(null, data);
+    })
+    .catch(function (error) {
+      progressIndicator.stopAndPersist(FAILURE_SYMBOL);
+      callback(error);
+    });
+}
+
 async.waterfall([
   inquire,
   createMentorIssue,
@@ -320,9 +396,12 @@ async.waterfall([
   updateTitoEvent,
   updateTitoEventSettings,
   getTitoEventReleases,
-  updateTitoEventRelease
+  updateTitoEventRelease,
+  getEventLocationLatLng,
+  addEventToNodeSchoolCalendar
 ], function (error, result) {
   if (error) {
-    console.log('ERROR', '\n', error);
+    console.log(chalk.red('There was an error creating the event ☹️'), '\n', error);
   }
+  console.log(chalk.green('Event created successfully! 😃'));
 });
