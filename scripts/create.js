@@ -40,8 +40,8 @@ const GITHUB_HEADERS = {
   Authorization: `token ${NODESCHOOL_OAK_GITHUB_API_TOKEN}`,
   'User-Agent': NODESCHOOL_OAK_GITHUB_API_USER
 };
-const GITHUB_ORG = 'Fauntleroy';
-const GITHUB_REPO = 'github-api-test-repo';
+const GITHUB_ORG = 'nodeschool';
+const GITHUB_REPO = 'oakland';
 const GOOGLE_MAPS_API_URL = 'https://maps.googleapis.com/maps/api';
 const SUCCESS_SYMBOL = chalk.green('✔');
 const FAILURE_SYMBOL = chalk.red('✘');
