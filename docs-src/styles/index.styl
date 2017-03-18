@@ -21,6 +21,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Gordita', sans-serif;
   font-weight: bold;
+  line-height: 125%;
 }
 
 h1 {
@@ -60,9 +61,9 @@ ul {
 .button {
   display: inline-block;
   border-top: lighten($color-nodeschool-yellow, 50%) 1px solid;
-  padding: 0 25px;
-  line-height: 250%;
+  padding: 10px 25px;
   font-family: 'Gordita', sans-serif;
+  line-height: 125%;
   text-align: center;
   color: $color-nodeschool-blue;
   background: $color-nodeschool-yellow;
@@ -88,6 +89,12 @@ ul {
   padding: 25px 0;
 }
 
+.section__content {
+  position: relative;
+  width: 830px;
+  margin: 0 auto;
+  padding: 0 0 0 190px;
+}
 
 
 .nodeschool-sf-love {
@@ -134,14 +141,7 @@ $logo-width = 140px;
   }
 }
 
-.header__content {
-  position: relative;
-  width: 830px;
-  margin: 0 auto;
-  padding: 0 0 0 190px;
-}
-
-.header__side-panel {
+.header__identification {
   position: absolute;
   top: 0;
   left: 0;
@@ -154,9 +154,13 @@ $logo-width = 140px;
 }
 
 .header__logo-text {
-  width: $logo-width;
+  font-family: sans-serif;
   font-size: 23px;
   text-align: center;
+}
+
+.header__logo-text__nodeschool {
+  font-family: 'ATC Harris', monospace;
 }
 
 .header__logo-text__oakland {
@@ -178,11 +182,13 @@ $logo-width = 140px;
 
 
 .next-event {
-  position: relative;
   margin: 35px 0 0 0;
-  padding: 35px 35px 70px 35px;
   background-color: $color-nodeschool-blue;
   filter: drop-shadow(0 0 15px $color-drop-shadow);
+}
+
+.next-event__description {
+  padding: 35px 35px 25px 35px;
 }
 
 .next-event__heading {
@@ -200,15 +206,11 @@ $logo-width = 140px;
 }
 
 .next-event__links {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 
 .next-event__links__link {
+  display: inline-block;
   position: relative;
-  float: left;
   width: 50%;
 
   &:hover,
@@ -244,12 +246,6 @@ $logo-width = 140px;
   }
 }
 
-.faq__content {
-  width: 830px;
-  margin: 0 auto;
-  padding: 0 0 0 190px;
-}
-
 .faq__subheading {
   margin: 30px 0 10px 0;
 }
@@ -264,8 +260,4 @@ $logo-width = 140px;
   background: $color-off-white;
 }
 
-.code-of-conduct__content {
-  width: 830px;
-  margin: 0 auto;
-  padding: 0 0 0 190px;
-}
+@import 'responsive.styl';
