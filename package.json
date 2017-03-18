@@ -7,14 +7,18 @@
     "doc": "docs"
   },
   "scripts": {
-    "docs:html:build": "mustache docs-src/data.json docs-src/index.mustache > docs/index.html",
-    "docs:html:watch": "chokidar docs-src/index.mustache -c 'npm run docs:html:build'",
-    "docs:css:copy": "ncp docs-src/css docs/css",
-    "docs:css:watch": "chokidar docs-src/css/* -c 'npm run docs:css:copy'",
-    "docs:images:copy": "ncp docs-src/images docs/images",
-    "docs:images:watch": "chokidar docs-src/images/* -c 'npm run docs:images:copy'",
-    "docs:build": "mkdirp docs && npm-run-all --serial docs:html:build docs:css:copy docs:images:copy",
-    "docs:watch": "npm-run-all --parallel docs:html:watch docs:css:watch docs:images:watch"
+    "docs:build": "mkdirp docs && npm-run-all --serial docs:build:*",
+    "docs:build:html": "mustache docs-src/data.json docs-src/index.mustache > docs/index.html",
+    "docs:build:styles": "mkdirp docs/styles && stylus docs-src/styles/index.styl --out docs/styles --include node_modules --include-css",
+    "docs:build:images": "ncp docs-src/images docs/images",
+    "docs:build:fonts": "ncp docs-src/fonts docs/fonts",
+    "docs:watch": "mkdirp docs && npm-run-all --parallel docs:watch:*",
+    "docs:watch:html": "chokidar docs-src/index.mustache -c 'npm run docs:build:html' --initial",
+    "docs:watch:styles": "npm run docs:build:styles -- -w",
+    "docs:watch:images": "chokidar docs-src/images/* -c 'npm run docs:build:images' --initial",
+    "docs:watch:fonts": "chokidar docs-src/fonts/* -c 'npm run docs:build:fonts' --initial",
+    "docs:server": "static docs",
+    "docs:dev": "npm-run-all --parallel docs:watch docs:server"
   },
   "repository": {
     "type": "git",
@@ -44,6 +48,8 @@
     "mkdirp": "^0.5.1",
     "mustache": "^2.3.0",
     "ncp": "^2.0.0",
-    "npm-run-all": "^4.0.2"
+    "node-static": "^0.7.9",
+    "npm-run-all": "^4.0.2",
+    "stylus": "^0.54.5"
   }
 }
