@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>NodeSchool Oakland</title>
+		<link rel="stylesheet" href="./css/vendor/normalize.css" />
+		<link rel="stylesheet" href="./css/vendor/skeleton.css" />
+		<link rel="stylesheet" href="./css/index.css" />
+	</head>
+	<body>
+		<div class="site">
+			<img class="logo" src="./images/nodeschool_oak.png" />
+			<h1 class="title">NodeSchool Oakland</h1>
+			<h5 class="twitter"><a href="https://twitter.com/nodeschooloak">@nodeschooloak</a></h5>
+			<section id="events" class="content-section">
+				{{#nextEvent}}
+				<div id="next-event" class="event">
+					<h4 class="event__title">Next Event</h4>
+					<div class="event__datetime">{{date}} {{time}}</div>
+					<div class="event__location">
+						at <a class="event__location__link" href="https://npmjs.com" target="_blank">npm</a>
+						<br />{{address}}
+ 					</div>
+					<br />
+					<a
+						class="event__ticket-link button button-primary button-large"
+						href="{{{ticketsUrl}}}">
+						Register
+					</a>
+					<iframe
+						class="event__location__map"
+						width="640"
+						height="320"
+						frameborder="0"
+						style="border:0"
+						src="https://www.google.com/maps/embed/v1/place?q={{{addressUrlSafe}}}&key=AIzaSyDX4XF5Cyp-IOPqwE3ho9LjH34BqvZaPp8">
+					</iframe>
+				</div>
+			</section>
+			{{/nextEvent}}
+			<section id="about" class="content-section">
+				<h4>What is NodeSchool Oakland?</h4>
+				<p>We're a monthly meetup group that helps people new to JavaScript, Node.js, or programming in general get comfortable with <a href="http://nodeschool.io/#workshopper-list">self directed lessons</a>. Our meetups are group learning experiences, where people of all skill levels come together to strengthen their understanding of JavaScript.</p>
+				<p>As part of our effort to ensure that everyone feels safe and welcome at our events, we ask that all participants follow our <a href="https://github.com/nodeschool/oakland/blob/master/code-of-conduct.md">Code of Conduct</a>.</p>
+			</section>
+		</div>
+	</body>
+</html>

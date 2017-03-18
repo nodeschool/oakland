@@ -1,0 +1,9 @@
+{
+  "nextEvent": {
+    "date": "April 8th",
+    "time": "1-5PM",
+    "address": "npm 1999 Harrison St #1150, Oakland, CA 94612",
+    "addressUrlSafe": "1999%20Harrison%20Street%20Suite%201150%20Oakland%2C%20CA%2094612",
+    "ticketsUrl": "https://ti.to/nodeschool-oakland/nodeschool-oakland-april-2017"
+  }
+}
