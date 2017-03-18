@@ -1,47 +1,162 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>NodeSchool Oakland</title>
-		<link rel="stylesheet" href="./css/vendor/normalize.css" />
-		<link rel="stylesheet" href="./css/vendor/skeleton.css" />
-		<link rel="stylesheet" href="./css/index.css" />
-	</head>
-	<body>
-		<div class="site">
-			<img class="logo" src="./images/nodeschool_oak.png" />
-			<h1 class="title">NodeSchool Oakland</h1>
-			<h5 class="twitter"><a href="https://twitter.com/nodeschooloak">@nodeschooloak</a></h5>
-			<section id="events" class="content-section">
-				{{#nextEvent}}
-				<div id="next-event" class="event">
-					<h4 class="event__title">Next Event</h4>
-					<div class="event__datetime">{{date}} {{time}}</div>
-					<div class="event__location">
-						at <a class="event__location__link" href="https://npmjs.com" target="_blank">npm</a>
-						<br />{{address}}
- 					</div>
-					<br />
-					<a
-						class="event__ticket-link button button-primary button-large"
-						href="{{{ticketsUrl}}}">
-						Register
-					</a>
-					<iframe
-						class="event__location__map"
-						width="640"
-						height="320"
-						frameborder="0"
-						style="border:0"
-						src="https://www.google.com/maps/embed/v1/place?q={{{addressUrlSafe}}}&key=AIzaSyDX4XF5Cyp-IOPqwE3ho9LjH34BqvZaPp8">
-					</iframe>
-				</div>
-			</section>
-			{{/nextEvent}}
-			<section id="about" class="content-section">
-				<h4>What is NodeSchool Oakland?</h4>
-				<p>We're a monthly meetup group that helps people new to JavaScript, Node.js, or programming in general get comfortable with <a href="http://nodeschool.io/#workshopper-list">self directed lessons</a>. Our meetups are group learning experiences, where people of all skill levels come together to strengthen their understanding of JavaScript.</p>
-				<p>As part of our effort to ensure that everyone feels safe and welcome at our events, we ask that all participants follow our <a href="https://github.com/nodeschool/oakland/blob/master/code-of-conduct.md">Code of Conduct</a>.</p>
-			</section>
-		</div>
-	</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>NodeSchool Oakland</title>
+    <link rel="stylesheet" href="/styles/index.css" />
+  </head>
+  <body>
+    <div class="site">
+
+      <header id="header" class="header">
+        <a class="nodeschool-sf-love" href="https://nodeschool.io/sanfrancisco">
+          <strong class="strong--alt">We 😍 NodeSchool SF!</strong>
+        </a>
+
+        <div class="header__content">
+          <div class="header__side-panel">
+            <img id="logo" class="header__logo" src="/images/nodeschool_oakland.svg" />
+            <div class="header__logo-text">
+              <div class="header__logo-text__nodeschool">NodeSchool</div>
+              <div class="header__logo-text__oakland">Oakland</div>
+            </div>
+            <nav class="header__social-links">
+              <a href="https://www.facebook.com/nodeschooloak/">
+                <svg class="icon icon-facebook">
+                  <use xlink:href="/images/nodeschool_icons.svg#icon-facebook-square"></use>
+                </svg>
+              </a>
+              <a href="https://twitter.com/nodeschooloak">
+                <svg class="icon icon-twitter">
+                  <use xlink:href="/images/nodeschool_icons.svg#icon-twitter"></use>
+                </svg>
+              </a>
+              <a href="https://github.com/nodeschool/oakland">
+                <svg class="icon icon-github">
+                  <use xlink:href="/images/nodeschool_icons.svg#icon-github"></use>
+                </svg>
+              </a>
+            </nav>
+          </div>
+
+          <div class="header__introduction">
+            <h1 class="header__introduction__heading">We Help You Learn JavaScript</h1>
+            <p class="header__introduction__body">
+              <strong>NodeSchool Oakland</strong> is a monthly meetup dedicated to helping people learn JavaScript. We help people of all skill levels–from beginners to experts–discover what's possible with JavaScript. Bring yourself, your computer, and the desire to learn to our next event!
+            </p>
+          </div>
+
+          {{#nextEvent}}
+          <div class="next-event">
+            <h2 class="next-event__heading">Our Next Event is on {{date}}</h2>
+            <ul class="next-event__info">
+              <li class="next-event__info__item">
+                <strong class="strong--alt">When?</strong> {{dayOfTheWeek}}, {{date}} from {{time}}
+              </li>
+              <li class="next-event__info__item">
+                <strong class="strong--alt">Where?</strong> {{address}} [<a href="http://maps.google.com/?q={{addressUrlSafe}}">map</a>]
+              </li>
+              <li class="next-event__info__item">
+                <strong class="strong--alt">What?</strong> Learning, mentoring, javascript bffs, and pizza 🍕
+              </li>
+            </ul>
+            <nav class="next-event__links">
+              <a class="next-event__links__learner next-event__links__link button" href="{{ticketsUrl}}">
+                Sign up as a Learner
+              </a>
+              <a class="next-event__links__mentor next-event__links__link button" href="{{mentorsUrl}}">
+                Sign up as a Mentor
+              </a>
+            </nav>
+          </div>
+          {{/nextEvent}}
+        </div>
+      </header>
+
+      <section id="faq" class="faq section">
+        <div class="faq__content">
+          <h2 class="faq__heading">Frequently Asked Questions</h2>
+          <dl class="faq__questions">
+            <dt class="faq__question">
+              <h4 class="faq__subheading">What do I need to bring?</h4>
+            </dt>
+            <dd class="faq__answer">
+              Bring a laptop, a desire to learn, and all your friendship!
+            </dd>
+
+            <dt class="faq__question">
+              <h4 class="faq__subheading">Who organizes this event?</h4>
+            </dt>
+            <dd class="faq__answer">
+              Timothy Kempf (<a href="https://twitter.com/takempf">@takempf</a>) and Ugo Aniuwku (<a href="https://twitter.com/ugobelu">@ugobelu</a>) run the Oakland chapter.
+            </dd>
+
+            <dt class="faq__question">
+              <h4 class="faq__subheading">What actually happens at a NodeSchool Oakland event?</h4>
+            </dt>
+            <dd class="faq__answer">
+              Overall, NodeSchool Oakland events are simply an opportunity to hang out with other learners and mentors in a low stress, encouraging environment. Here's the basic schedule our events follow:
+              <ul class="schedule">
+                <li class="schedule__item"><strong>1:00</strong> - Doors open</li>
+                <li class="schedule__item"><strong>1:30</strong> - Introduction/Opening comments</li>
+                <li class="schedule__item"><strong>1:40-5:00</strong> - General learning/mentoring</li>
+                <li class="schedule__item"><strong>3:00ish</strong> - Pizza! 🍕</li>
+                <li class="schedule__item"><strong>4:30</strong> - Group photo</li>
+                <li class="schedule__item"><strong>5:00</strong> - Event ends</li>
+              </ul>
+            </dd>
+
+            <dt class="faq__question">
+              <h4 class="faq__subheading">How much does it cost to attend?</h4>
+            </dt>
+            <dd class="faq__answer">
+              NodeSchool Oakland is <strong>free</strong>! And <a href="https://github.com/nodeschool/oakland">open source</a>!
+            </dd>
+          </dl>
+        </div>
+      </section>
+
+      <section id="code-of-conduct" class="code-of-conduct section">
+        <div class="code-of-conduct__content">
+          <h2>Code of Conduct</h2>
+          <p>We, the organizers of <strong>NodeSchool Oakland</strong>, are dedicated to providing a
+          harassment-free community for everyone, regardless of sex, gender identity or
+          expression, sexual orientation, disability, physical appearance, age, body
+          size, race, nationality, or religious beliefs. We do not tolerate harassment of
+          community members in any form. Participants violating these rules may be
+          sanctioned or expelled from the community at the discretion of the organizers
+          of <strong>NodeSchool Oakland</strong>.</p>
+          <p>Harassment includes offensive verbal or written comments related to sex, gender
+          identity or expression, sexual orientation, disability, physical appearance,
+          age, body size, race, nationality, or religious beliefs, deliberate
+          intimidation, threats, stalking, following, harassing photography or recording,
+          sustained disruption of talks or other events, inappropriate physical contact,
+          and unwelcome sexual attention. Sexual language and imagery is not appropriate
+          for any events at <strong>NodeSchool Oakland</strong> meetups or in any related
+          communication channels. Community members asked to stop any harassing behavior
+          are expected to comply immediately. Sponsors and presenters are also subject to
+          the anti-harassment policy.</p>
+          <p>If a community member engages in harassing behavior, the organizers of
+          <strong>NodeSchool Oakland</strong> may take any action they deem appropriate, including
+          warning the offender or expulsion from the community. If you are being
+          harassed, notice that someone else is being harassed, or have any concerns,
+          please contact an organizer immediately.</p>
+          <h3><strong>NodeSchool Oakland</strong></h3>
+          <ul>
+          <li>Organizers: Timothy Kempf (<a href="https://twitter.com/takempf">@takempf</a>)</li>
+          <li>Meetup URL: <a href="http://nodeschool.io/oakland/">http://nodeschool.io/oakland/</a></li>
+          </ul>
+          <p><strong>If you have questions or feedback about this Code of Conduct please contact
+          one of the organizers.</strong></p>
+          <p>The organizers of the above communities developed this Code of Conduct to
+          govern their respective events and communication channels. We used <a href="http://www.meetup.com/pdxpython/pages/Code_of_Conduct/">PDX
+          Python's anti-harassment policy</a>
+          and the <a href="http://geekfeminism.wikia.com/wiki/Conference_anti-harassment/Policy">Geek Feminism Conference anti-harassment policy</a>
+          as a starting point. This Code of Conduct, like its inspirations, is licensed under
+          the <a href="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons Zero license</a>.</p>
+        </div>
+      </section>
+
+    </div>
+  </body>
 </html>
