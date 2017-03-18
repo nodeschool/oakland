@@ -7,7 +7,14 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "docs:html:build": "mustache docs-src/data.json docs-src/index.mustache > docs/index.html",
+    "docs:html:watch": "chokidar docs-src/index.mustache -c 'npm run docs:html:build'",
+    "docs:css:copy": "ncp docs-src/css docs/css",
+    "docs:css:watch": "chokidar docs-src/css/* -c 'npm run docs:css:copy'",
+    "docs:images:copy": "ncp docs-src/images docs/images",
+    "docs:images:watch": "chokidar docs-src/images/* -c 'npm run docs:images:copy'",
+    "docs:build": "mkdirp docs && npm-run-all --serial docs:html:build docs:css:copy docs:images:copy",
+    "docs:watch": "npm-run-all --parallel docs:html:watch docs:css:watch docs:images:watch"
   },
   "repository": {
     "type": "git",
@@ -31,5 +38,12 @@
     "ora": "^0.3.0",
     "request": "^2.75.0",
     "slug": "^0.9.1"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "mustache": "^2.3.0",
+    "ncp": "^2.0.0",
+    "npm-run-all": "^4.0.2"
   }
 }
