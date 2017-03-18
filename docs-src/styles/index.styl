@@ -5,6 +5,15 @@
 
 @import 'variables.styl';
 
+@keyframes glow {
+  0%, 100% {
+    outline-color: lighten($color-electric-blue, 70%);
+  }
+  50% {
+    outline-color: lighten($color-electric-blue, 10%);
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -76,6 +85,7 @@ ul {
     outline: lighten($color-electric-blue, 25%) 3px solid;
     box-shadow: 0 0 8px 4px $color-electric-blue;
     transition: background 100ms;
+    animation: glow 2000ms infinite;
   }
 
   &:active {

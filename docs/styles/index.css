@@ -527,6 +527,7 @@ ul {
   outline: #6bf7fe 3px solid;
   box-shadow: 0 0 8px 4px #3af4fd;
   transition: background 100ms;
+  animation: glow 2000ms infinite;
 }
 .button:active {
   background: #f6cb13;
@@ -697,5 +698,37 @@ ul {
   }
   .header__introduction {
     padding: 0;
+  }
+}
+@-moz-keyframes glow {
+  0%, 100% {
+    outline-color: #c4fcfe;
+  }
+  50% {
+    outline-color: #4ef5fd;
+  }
+}
+@-webkit-keyframes glow {
+  0%, 100% {
+    outline-color: #c4fcfe;
+  }
+  50% {
+    outline-color: #4ef5fd;
+  }
+}
+@-o-keyframes glow {
+  0%, 100% {
+    outline-color: #c4fcfe;
+  }
+  50% {
+    outline-color: #4ef5fd;
+  }
+}
+@keyframes glow {
+  0%, 100% {
+    outline-color: #c4fcfe;
+  }
+  50% {
+    outline-color: #4ef5fd;
   }
 }
