@@ -40,7 +40,9 @@ a {
   text-decoration: none;
   color: $color-nodeschool-blue;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    outline: none;
     color: $color-electric-blue;
   }
 }
@@ -64,12 +66,21 @@ ul {
   text-align: center;
   color: $color-nodeschool-blue;
   background: $color-nodeschool-yellow;
+  transition: background 300ms;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: lighten($color-nodeschool-blue, 15%);
     background: lighten($color-nodeschool-yellow, 15%);
     outline: lighten($color-electric-blue, 25%) 3px solid;
     box-shadow: 0 0 8px 4px $color-electric-blue;
+    transition: background 100ms;
+  }
+
+  &:active {
+    background: darken($color-nodeschool-yellow, 15%);
+    transform: translateY(2px);
+    transition: background 0ms;
   }
 }
 
@@ -103,8 +114,10 @@ $logo-width = 140px;
   a:not(.button) {
     color: $color-nodeschool-yellow;
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: $color-electric-blue;
+      filter: drop-shadow(0 0 5px $color-electric-blue);
     }
   }
 
@@ -198,7 +211,8 @@ $logo-width = 140px;
   float: left;
   width: 50%;
 
-  &:hover {
+  &:hover,
+  &:focus {
     z-index: 500;
   }
 }
@@ -206,7 +220,8 @@ $logo-width = 140px;
 .next-event__links__mentor {
   border-left: $color-nodeschool-blue 1px solid;
 
-  &:hover {
+  &:hover,
+  &:focus {
     border-left: $color-nodeschool-yellow 1px solid;
   }
 }

@@ -497,7 +497,9 @@ a {
   text-decoration: none;
   color: #08449c;
 }
-a:hover {
+a:hover,
+a:focus {
+  outline: none;
   color: #3af4fd;
 }
 ul {
@@ -515,12 +517,20 @@ ul {
   text-align: center;
   color: #08449c;
   background: #f8d540;
+  transition: background 300ms;
 }
-.button:hover {
+.button:hover,
+.button:focus {
   color: #0b5acd;
   background: #f9db5d;
   outline: #6bf7fe 3px solid;
   box-shadow: 0 0 8px 4px #3af4fd;
+  transition: background 100ms;
+}
+.button:active {
+  background: #f6cb13;
+  transform: translateY(2px);
+  transition: background 0ms;
 }
 .section {
   padding: 25px 0;
@@ -544,8 +554,10 @@ ul {
 .header a:not(.button) {
   color: #f8d540;
 }
-.header a:not(.button):hover {
+.header a:not(.button):hover,
+.header a:not(.button):focus {
   color: #3af4fd;
+  filter: drop-shadow(0 0 5px #3af4fd);
 }
 .header:after {
   content: '';
@@ -621,13 +633,15 @@ ul {
   float: left;
   width: 50%;
 }
-.next-event__links__link:hover {
+.next-event__links__link:hover,
+.next-event__links__link:focus {
   z-index: 500;
 }
 .next-event__links__mentor {
   border-left: #08449c 1px solid;
 }
-.next-event__links__mentor:hover {
+.next-event__links__mentor:hover,
+.next-event__links__mentor:focus {
   border-left: #f8d540 1px solid;
 }
 .faq {
