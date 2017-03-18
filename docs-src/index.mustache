@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>NodeSchool Oakland</title>
     <link rel="stylesheet" href="./styles/index.css" />
   </head>
@@ -13,8 +14,8 @@
           <strong class="strong--alt">We 😍 NodeSchool SF!</strong>
         </a>
 
-        <div class="header__content">
-          <div class="header__side-panel">
+        <div class="header__content section__content">
+          <div class="header__identification">
             <img id="logo" class="header__logo" src="./images/nodeschool_oakland.svg" />
             <div class="header__logo-text">
               <div class="header__logo-text__nodeschool">NodeSchool</div>
@@ -48,23 +49,24 @@
 
           {{#nextEvent}}
           <div class="next-event">
-            <h2 class="next-event__heading">Our Next Event is on {{date}}</h2>
-            <ul class="next-event__info">
-              <li class="next-event__info__item">
-                <strong class="strong--alt">When?</strong> {{dayOfTheWeek}}, {{date}} from {{time}}
-              </li>
-              <li class="next-event__info__item">
-                <strong class="strong--alt">Where?</strong> {{address}} [<a href="http://maps.google.com/?q={{addressUrlSafe}}">map</a>]
-              </li>
-              <li class="next-event__info__item">
-                <strong class="strong--alt">What?</strong> Learning, mentoring, javascript bffs, and pizza 🍕
-              </li>
-            </ul>
+            <div class="next-event__description">
+              <h2 class="next-event__heading">Our Next Event is on {{date}}</h2>
+              <ul class="next-event__info">
+                <li class="next-event__info__item">
+                  <strong class="strong--alt">When?</strong> {{dayOfTheWeek}}, {{date}} from {{time}}
+                </li>
+                <li class="next-event__info__item">
+                  <strong class="strong--alt">Where?</strong> {{address}} [<a href="http://maps.google.com/?q={{addressUrlSafe}}">map</a>]
+                </li>
+                <li class="next-event__info__item">
+                  <strong class="strong--alt">What?</strong> Learning, mentoring, javascript bffs, and pizza 🍕
+                </li>
+              </ul>
+            </div>
             <nav class="next-event__links">
               <a class="next-event__links__learner next-event__links__link button" href="{{ticketsUrl}}">
                 Sign up as a Learner
-              </a>
-              <a class="next-event__links__mentor next-event__links__link button" href="{{mentorsUrl}}">
+              </a><a class="next-event__links__mentor next-event__links__link button" href="{{mentorsUrl}}">
                 Sign up as a Mentor
               </a>
             </nav>
@@ -74,7 +76,7 @@
       </header>
 
       <section id="faq" class="faq section">
-        <div class="faq__content">
+        <div class="faq__content section__content">
           <h2 class="faq__heading">Frequently Asked Questions</h2>
           <dl class="faq__questions">
             <dt class="faq__question">
@@ -117,7 +119,7 @@
       </section>
 
       <section id="code-of-conduct" class="code-of-conduct section">
-        <div class="code-of-conduct__content">
+        <div class="code-of-conduct__content section__content">
           <h2>Code of Conduct</h2>
           <p>We, the organizers of <strong>NodeSchool Oakland</strong>, are dedicated to providing a
           harassment-free community for everyone, regardless of sex, gender identity or
