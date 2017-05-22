@@ -24,7 +24,9 @@ const NODESCHOOL_OAK_DEFAULT_EVENT_COORDS = {
   lat: 37.8077447,
   lng: -122.2653488
 };
-const NODESCHOOL_CALENDAR_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe2SK5Vzy82yB9SjLI5B3zfrR1QEaxyjyRGvVxWp_K66p31ZA/viewform';
+// test calendar form url https://docs.google.com/forms/d/e/1FAIpQLSe2SK5Vzy82yB9SjLI5B3zfrR1QEaxyjyRGvVxWp_K66p31ZA/viewform
+// live calendar form url https://docs.google.com/forms/d/e/1FAIpQLSfp2GU7mntDJtLGwSu84gd6EztBMwQuqXImtrCgjzjbJNKf2Q/viewform
+const NODESCHOOL_CALENDAR_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfp2GU7mntDJtLGwSu84gd6EztBMwQuqXImtrCgjzjbJNKf2Q/viewform';
 const NODESCHOOL_CHAPTER_NAME = 'NodeSchool Oakland';
 const NODESCHOOL_CHAPTER_LOCATION = 'Oakland, California';
 const NODESCHOOL_CHAPTER_URL = 'https://nodeschool.io/oakland';
