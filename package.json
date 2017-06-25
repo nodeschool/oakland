@@ -7,6 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "create": "node scripts/create.js",
     "docs:build": "mkdirp docs && npm-run-all --serial docs:build:*",
     "docs:build:html": "mustache docs-src/data.json docs-src/index.mustache > docs/index.html",
     "docs:build:styles": "mkdirp docs/styles && stylus docs-src/styles/index.styl --out docs/styles --include node_modules --include-css",
@@ -18,7 +19,8 @@
     "docs:watch:images": "chokidar docs-src/images/* -c 'npm run docs:build:images' --initial",
     "docs:watch:fonts": "chokidar docs-src/fonts/* -c 'npm run docs:build:fonts' --initial",
     "docs:server": "static docs",
-    "docs:dev": "npm-run-all --parallel docs:watch docs:server"
+    "docs:dev": "npm-run-all --parallel docs:watch docs:server",
+    "docs:publish": "git add docs-src/* docs/* && git commit -m \"AUTOMATIC site update\" && git push"
   },
   "repository": {
     "type": "git",

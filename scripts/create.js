@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { spawn } = require('child_process');
 
 const request = require('request');
 const inquirer = require('inquirer');
@@ -19,7 +20,7 @@ const {
   NODESCHOOL_OAK_TITO_API_KEY,
   NODESCHOOL_OAK_GOOGLE_MAPS_API_KEY
 } = process.env;
-const NODESCHOOL_OAK_DEFAULT_EVENT_LOCATION = '1999 Harrison St. Ste. 1150 Oakland, CA 94612';
+const NODESCHOOL_OAK_DEFAULT_EVENT_LOCATION = '1999 Harrison St #1150 Oakland, CA 94612';
 const NODESCHOOL_OAK_DEFAULT_EVENT_COORDS = {
   lat: 37.8077447,
   lng: -122.2653488
@@ -235,9 +236,11 @@ function updateTitoEvent (data, callback) {
     progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
     const eventApiId = _.get(body, 'data.id');
     const eventApiUrl = _.get(body, 'data.links.self');
+    const eventRegistrationUrl = 'https://ti.to/nodeschool-oakland/' + _.get(body, 'data.attributes.slug');
     const updatedData = _.assign(data, {
       eventApiId,
-      eventApiUrl
+      eventApiUrl,
+      eventRegistrationUrl
     });
     callback(null, updatedData);
   });
@@ -377,7 +380,9 @@ function addEventToNodeSchoolCalendar (data, callback) {
     })
     .wait('.freebirdFormviewerViewResponseLinksContainer')
     .evaluate(function () {
-      return document.querySelector('.freebirdFormviewerViewResponseBottomLink').href;
+      const xpathQuery = document.evaluate("//a[contains(., 'Edit your response')]", document);
+      const editUrl = xpathQuery.iterateNext().href;
+      return editUrl;
     })
     .end()
     .then(function (editLink) {
@@ -391,6 +396,56 @@ function addEventToNodeSchoolCalendar (data, callback) {
     });
 }
 
+function generateWebsite (data, callback) {
+  const progressIndicator = ora('Generating website').start();
+  const {
+    eventDate,
+    eventTime,
+    eventLocationName,
+    eventLocation,
+    eventRegistrationUrl,
+    mentorRegistrationUrl
+  } = data;
+  const siteData = {
+    nextEvent: {
+      dayOfTheWeek: moment(eventDate).format('dddd'),
+      date: moment(eventDate).format('MMMM Do'),
+      time: eventTime,
+      address: `${eventLocationName} ${eventLocation}`,
+      addressUrlSafe: encodeURIComponent(eventLocation),
+      mentorsUrl: mentorRegistrationUrl,
+      ticketsUrl: eventRegistrationUrl
+    }
+  };
+  const dataJsonString = JSON.stringify(siteData, null, 2);
+
+  fs.writeFileSync(`${__dirname}/../docs-src/data.json`, dataJsonString, { encoding: 'UTF8' });
+
+  const docsBuild = spawn('npm', ['run', 'docs:build'], { stdio: 'inherit' });
+  docsBuild.on('error', function (error) {
+    progressIndicator.stopAndPersist(FAILURE_SYMBOL);
+    callback(error);
+  });
+  docsBuild.on('close', function () {
+    progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
+    callback(null, data);
+  });
+}
+
+function publishWebsite (data, callback) {
+  const progressIndicator = ora('Publishing website').start();
+  const docsPublish = spawn('npm', ['run', 'docs:publish'], { stdio: 'inherit' });
+
+  docsPublish.on('error', function (error) {
+    progressIndicator.stopAndPersist(FAILURE_SYMBOL);
+    callback(error);
+  });
+  docsPublish.on('close', function () {
+    progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
+    callback(null, data);
+  });
+}
+
 async.waterfall([
   inquire,
   createMentorIssue,
@@ -400,7 +455,9 @@ async.waterfall([
   getTitoEventReleases,
   updateTitoEventRelease,
   getEventLocationLatLng,
-  addEventToNodeSchoolCalendar
+  addEventToNodeSchoolCalendar,
+  generateWebsite,
+  publishWebsite
 ], function (error, result) {
   if (error) {
     console.log(chalk.red('There was an error creating the event ☹️'), '\n', error);
