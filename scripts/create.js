@@ -461,6 +461,7 @@ async.waterfall([
 ], function (error, result) {
   if (error) {
     console.log(chalk.red('There was an error creating the event ☹️'), '\n', error);
+  } else {
+    console.log(chalk.green('Event created successfully! 😃'));
   }
-  console.log(chalk.green('Event created successfully! 😃'));
 });
