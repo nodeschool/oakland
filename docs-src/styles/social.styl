@@ -6,9 +6,10 @@
   left: 0;
 
   .header {
+    display: flex;
     width: 100%;
     height: 100%;
-    padding: 50px;
+    padding: 50px 50px 60px 50px;
 
     &:after {
       background-size: 40px 26px;
@@ -33,6 +34,13 @@
     padding: 30px 50px;
   }
 
+  .next-event__actions {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
   .next-event__action__learn {
     width: 100%;
     line-height: 160%;
@@ -41,9 +49,9 @@
 }
 
 .social__message {
-  float: left;
+  position: relative;
+  flex: 1;
   margin: 0 0 0 50px;
-  width: 815px;
   font-size: 38px;
   line-height: 45px;
 
