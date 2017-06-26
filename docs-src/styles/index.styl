@@ -5,6 +5,8 @@
 
 @import 'variables.styl';
 
+@import 'buttons.styl';
+
 @keyframes glow {
   0%, 100% {
     outline-color: lighten($color-electric-blue, 70%);
@@ -65,34 +67,6 @@ ul {
 
 .strong--alt {
   font-family: 'Gordita', sans-serif;
-}
-
-.button {
-  display: inline-block;
-  border-top: lighten($color-nodeschool-yellow, 50%) 1px solid;
-  padding: 10px 25px;
-  font-family: 'Gordita', sans-serif;
-  line-height: 125%;
-  text-align: center;
-  color: $color-nodeschool-blue;
-  background: $color-nodeschool-yellow;
-  transition: background 300ms;
-
-  &:hover,
-  &:focus {
-    color: lighten($color-nodeschool-blue, 15%);
-    background: lighten($color-nodeschool-yellow, 15%);
-    outline: lighten($color-electric-blue, 25%) 3px solid;
-    box-shadow: 0 0 8px 4px $color-electric-blue;
-    transition: background 100ms;
-    animation: glow 2000ms infinite;
-  }
-
-  &:active {
-    background: darken($color-nodeschool-yellow, 15%);
-    transform: translateY(2px);
-    transition: background 0ms;
-  }
 }
 
 .section {
@@ -221,10 +195,10 @@ $logo-width = 140px;
   margin: 0;
 }
 
-.next-event__links {
+.next-event__actions {
 }
 
-.next-event__links__link {
+.next-event__action {
   display: inline-block;
   position: relative;
   width: 50%;
@@ -235,7 +209,7 @@ $logo-width = 140px;
   }
 }
 
-.next-event__links__mentor {
+.next-event__action__mentor {
   border-left: $color-nodeschool-blue 1px solid;
 
   &:hover,
@@ -277,3 +251,4 @@ $logo-width = 140px;
 }
 
 @import 'responsive.styl';
+@import 'social.styl';

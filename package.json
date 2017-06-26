@@ -9,7 +9,7 @@
   "scripts": {
     "create": "node scripts/create.js",
     "docs:build": "mkdirp docs && npm-run-all --serial docs:build:*",
-    "docs:build:html": "mustache docs-src/data.json docs-src/index.mustache > docs/index.html",
+    "docs:build:html": "mustache docs-src/data.json docs-src/index.mustache > docs/index.html && mustache docs-src/data.json docs-src/social.mustache > docs/social.html",
     "docs:build:styles": "mkdirp docs/styles && stylus docs-src/styles/index.styl --out docs/styles --include node_modules --include-css",
     "docs:build:images": "ncp docs-src/images docs/images",
     "docs:build:fonts": "ncp docs-src/fonts docs/fonts",
@@ -20,7 +20,8 @@
     "docs:watch:fonts": "chokidar docs-src/fonts/* -c 'npm run docs:build:fonts' --initial",
     "docs:server": "static docs",
     "docs:dev": "npm-run-all --parallel docs:watch docs:server",
-    "docs:publish": "git add docs-src/* docs/* && git commit -m \"AUTOMATIC site update\" && git push"
+    "docs:publish": "git add docs-src/* docs/* && git commit -m \"AUTOMATIC site update\" && git push",
+    "docs:generate-social": "node scripts/generate_social_image.js"
   },
   "repository": {
     "type": "git",
@@ -52,6 +53,7 @@
     "ncp": "^2.0.0",
     "node-static": "^0.7.9",
     "npm-run-all": "^4.0.2",
+    "sharp": "^0.18.1",
     "stylus": "^0.54.5"
   }
 }

@@ -1,0 +1,28 @@
+.button {
+  display: inline-block;
+  border: none;
+  border-top: lighten($color-nodeschool-yellow, 50%) 1px solid;
+  padding: 10px 25px;
+  font-family: 'Gordita', sans-serif;
+  line-height: 125%;
+  text-align: center;
+  color: $color-nodeschool-blue;
+  background: $color-nodeschool-yellow;
+  transition: background 300ms;
+
+  &:hover,
+  &:focus {
+    color: lighten($color-nodeschool-blue, 15%);
+    background: lighten($color-nodeschool-yellow, 15%);
+    outline: lighten($color-electric-blue, 25%) 3px solid;
+    box-shadow: 0 0 8px 4px $color-electric-blue;
+    transition: background 100ms;
+    animation: glow 2000ms infinite;
+  }
+
+  &:active {
+    background: darken($color-nodeschool-yellow, 15%);
+    transform: translateY(2px);
+    transition: background 0ms;
+  }
+}

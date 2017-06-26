@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,target-densitydpi=device-dpi">
+    <meta name="robots" content="noindex">
+    <title>NodeSchool Oakland - Social Image</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body>
+    <div class="social">
+      <div class="header">
+        <div class="header__identification">
+          <img id="logo" class="header__logo" src="./images/nodeschool_oakland.svg" />
+          <div class="header__logo-text">
+            <div class="header__logo-text__nodeschool">NodeSchool</div>
+            <div class="header__logo-text__oakland">Oakland</div>
+          </div>
+        </div>
+        {{#nextEvent}}
+        <div class="social__message next-event">
+          <div class="next-event__description">
+            <p><strong>What?</strong> Learning JavaScript, eating pizza</p>
+            <p><strong>When?</strong> {{dayOfTheWeek}}, {{date}} from {{time}}</p>
+            <p><strong>Where?</strong> {{address}}</p>
+          </div>
+          <div class="next-event__actions">
+            <button class="next-event__action__learn next-event__action social__button button">Learn With Us</button>
+          </div>
+        </div>
+        {{/nextEvent}}
+      </div>
+    </div>
+  </body>
+</html>
