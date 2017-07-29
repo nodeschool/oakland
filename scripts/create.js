@@ -432,6 +432,20 @@ function generateWebsite (data, callback) {
   });
 }
 
+function generateSocialImage (data, callback) {
+  const progressIndicator = ora('Generating social image').start();
+  const generateSocial = spawn('npm', ['run', 'docs:generate-social'], { stdio: 'inherit' });
+
+  generateSocial.on('error', function (error) {
+    progressIndicator.stopAndPersist(FAILURE_SYMBOL);
+    callback(error);
+  });
+  generateSocial.on('close', function () {
+    progressIndicator.stopAndPersist(SUCCESS_SYMBOL);
+    callback(null, data);
+  });
+}
+
 function publishWebsite (data, callback) {
   const progressIndicator = ora('Publishing website').start();
   const docsPublish = spawn('npm', ['run', 'docs:publish'], { stdio: 'inherit' });
@@ -457,6 +471,7 @@ async.waterfall([
   getEventLocationLatLng,
   addEventToNodeSchoolCalendar,
   generateWebsite,
+  generateSocial,
   publishWebsite
 ], function (error, result) {
   if (error) {
