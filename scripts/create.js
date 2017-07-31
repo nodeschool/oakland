@@ -407,6 +407,7 @@ function generateWebsite (data, callback) {
     mentorRegistrationUrl
   } = data;
   const siteData = {
+    generatedAt: Date.now(),
     nextEvent: {
       dayOfTheWeek: moment(eventDate).format('dddd'),
       date: moment(eventDate).format('MMMM Do'),
