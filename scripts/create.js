@@ -472,7 +472,7 @@ async.waterfall([
   getEventLocationLatLng,
   addEventToNodeSchoolCalendar,
   generateWebsite,
-  generateSocial,
+  generateSocialImage,
   publishWebsite
 ], function (error, result) {
   if (error) {
