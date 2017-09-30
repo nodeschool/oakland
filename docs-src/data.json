@@ -1,12 +1,12 @@
 {
-  "generatedAt": 1504298910758,
+  "generatedAt": 1506792523602,
   "nextEvent": {
     "dayOfTheWeek": "Saturday",
-    "date": "September 16th",
+    "date": "October 14th",
     "time": "1-5PM",
     "address": "npm 1999 Harrison St #1150 Oakland, CA 94612",
     "addressUrlSafe": "1999%20Harrison%20St%20%231150%20Oakland%2C%20CA%2094612",
-    "mentorsUrl": "https://github.com/nodeschool/oakland/issues/56",
-    "ticketsUrl": "https://ti.to/nodeschool-oakland/nodeschool-oakland-september-2017"
+    "mentorsUrl": "https://github.com/nodeschool/oakland/issues/57",
+    "ticketsUrl": "https://ti.to/nodeschool-oakland/nodeschool-oakland-october-2017"
   }
 }
