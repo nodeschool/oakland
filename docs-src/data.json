@@ -1,12 +1,12 @@
 {
-  "generatedAt": 1521835224809,
+  "generatedAt": 1525038780970,
   "nextEvent": {
     "dayOfTheWeek": "Saturday",
-    "date": "April 14th",
+    "date": "May 12th",
     "time": "1-5PM",
     "address": "npm 1999 Harrison St #1150 Oakland, CA 94612",
     "addressUrlSafe": "1999%20Harrison%20St%20%231150%20Oakland%2C%20CA%2094612",
-    "mentorsUrl": "https://github.com/nodeschool/oakland/issues/60",
-    "ticketsUrl": "https://ti.to/nodeschool-oakland/nodeschool-oakland-april-2018"
+    "mentorsUrl": "https://github.com/nodeschool/oakland/issues/62",
+    "ticketsUrl": "https://ti.to/nodeschool-oakland/nodeschool-oakland-may-2018"
   }
 }
