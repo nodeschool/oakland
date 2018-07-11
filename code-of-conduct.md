@@ -27,7 +27,7 @@ please contact an organizer immediately.
 
 ### **NodeSchool Oakland**
 
-* Organizers: Timothy Kempf ([@takempf](https://twitter.com/takempf))
+* Organizers: Timothy Kempf ([@takempf](https://twitter.com/takempf)) and DJ Gill ([@dejongill](https://twitter.com/dejongill))
 * Meetup URL: http://nodeschool.io/oakland/
 
 **If you have questions or feedback about this Code of Conduct please contact
