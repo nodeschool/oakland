@@ -18,6 +18,7 @@ We utilize [GitHub Issues](https://github.com/nodeschool/oakland/issues) like a 
 ## Team
 
  - Timothy Kempf ([Twitter](https://twitter.com/takempf/), [Email](mailto:tim@kemp59f.info))
+ - DJ Gill ([Twitter](https://twitter.com/dejongill/), [Email](mailto:dejonjgill@gmail.com))
 
 -----
 
