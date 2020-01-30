@@ -1,12 +1,12 @@
 {
-  "generatedAt": 1562957865815,
+  "generatedAt": 1580423937285,
   "nextEvent": {
     "dayOfTheWeek": "Saturday",
-    "date": "July 27th",
+    "date": "February 15th",
     "time": "1-5PM",
-    "address": "npm 1999 Harrison St #1150 Oakland, CA 94612",
-    "addressUrlSafe": "1999%20Harrison%20St%20%231150%20Oakland%2C%20CA%2094612",
-    "mentorsUrl": "https://github.com/nodeschool/oakland/issues/77",
-    "ticketsUrl": "https://ti.to/nodeschool-oakland/nodeschool-oakland-july-2019"
+    "address": "The Port Workspaces 344 20th St Oakland, CA 94612",
+    "addressUrlSafe": "344%2020th%20St%20Oakland,%20CA%2094612",
+    "mentorsUrl": "https://github.com/nodeschool/oakland/issues/84",
+    "ticketsUrl": "https://ti.to/nodeschool-oakland/nodeschool-oakland-february-2020"
   }
 }
