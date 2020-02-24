@@ -25,8 +25,6 @@ const NODESCHOOL_OAK_DEFAULT_EVENT_COORDS = {
   lat: 37.8077447,
   lng: -122.2653488
 };
-// test calendar form url https://docs.google.com/forms/d/e/1FAIpQLSe2SK5Vzy82yB9SjLI5B3zfrR1QEaxyjyRGvVxWp_K66p31ZA/viewform
-// live calendar form url https://docs.google.com/forms/d/e/1FAIpQLSfp2GU7mntDJtLGwSu84gd6EztBMwQuqXImtrCgjzjbJNKf2Q/viewform
 const NODESCHOOL_CALENDAR_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfp2GU7mntDJtLGwSu84gd6EztBMwQuqXImtrCgjzjbJNKf2Q/viewform';
 const NODESCHOOL_CHAPTER_NAME = 'NodeSchool Oakland';
 const NODESCHOOL_CHAPTER_LOCATION = 'Oakland, California';
@@ -361,6 +359,7 @@ function addEventToNodeSchoolCalendar (data, callback) {
   const progressIndicator = ora('Adding event to NodeSchool calendar').start();
   const { eventLocationCoordinates, eventDate } = data;
   const nightmare = Nightmare({
+    executionTimeout: 25000,
     show: true,
     webPreferences: {
       preload: `${__dirname}/config/custom_nightmare_preload.js`
@@ -373,7 +372,9 @@ function addEventToNodeSchoolCalendar (data, callback) {
     .type('input[aria-label="Location"]', NODESCHOOL_CHAPTER_LOCATION)
     .type('input[aria-label="Latitude"]', eventLocationCoordinates.lat)
     .type('input[aria-label="Longitude"]', eventLocationCoordinates.lng)
-    .type('*[aria-label="Start Date"] input', moment(eventDate).format('MMDDYYYY'))
+    .type('[aria-label="Start Date"] input[aria-label="Month"]', moment(eventDate).format('MM'))
+    .type('[aria-label="Start Date"] input[aria-label="Day of the month"]', moment(eventDate).format('DD'))
+    .type('[aria-label="Start Date"] input[aria-label="Year"]', moment(eventDate).format('YYYY'))
     .type('input[aria-label="Website"]', NODESCHOOL_CHAPTER_URL)
     .evaluate(function () {
       document.querySelector('form').submit();
@@ -470,10 +471,10 @@ async.waterfall([
   getTitoEventReleases,
   updateTitoEventRelease,
   getEventLocationLatLng,
-  addEventToNodeSchoolCalendar,
   generateWebsite,
   generateSocialImage,
-  publishWebsite
+  publishWebsite,
+  // addEventToNodeSchoolCalendar
 ], function (error, result) {
   if (error) {
     console.log(chalk.red('There was an error creating the event ☹️'), '\n', error);
